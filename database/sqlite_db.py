@@ -9,6 +9,8 @@ def sql_start():
 		print('Data base connected OK!')
 	base.execute('CREATE TABLE IF NOT EXISTS menu(id_book TEXT PRIMARY KEY,category TEXT,name TEXT, author TEXT, paint TEXT, description TEXT, count TEXT)')
 	base.execute('CREATE TABLE IF NOT EXISTS user(id_book TEXT, user_id TEXT,date1 TEXT, date2 TEXT ,name TEXT)')
+	base.execute('CREATE TABLE IF NOT EXISTS auth(user_id TEXT PRIMARY KEY, name TEXT, bilet TEXT, group1 TEXT, group2 TEXT,email TEXT, email1 TEXT, password TEXT)')
+	base.execute('CREATE TABLE IF NOT EXISTS dele(id_book TEXT)')
 	base.commit()
 
 
@@ -27,6 +29,9 @@ async def sql_add_user(data0):
 	cur.execute('INSERT INTO user VALUES (?,?,?,?,?)', tuple(data0))
 	base.commit()
 
+async def sql_add_auth(data0):
+	cur.execute('INSERT INTO auth VALUES (?,?,?,?,?,?,?,?)', tuple(data0))
+	base.commit()
 
 async def sql_delete_command(data):
 	datap, point1 = data.split(' ')
